@@ -1,1 +1,28 @@
+pipeline {
 
+  agent any
+  tools {
+       maven 'Maven'
+   }
+  stages {
+
+       stage('SonarStage') {
+       
+	       environment {
+	    		 SCANNER_HOME = tool 'sonarScanner'
+	  		}
+           steps {
+              
+             withSonarQubeEnv('sonar_cloud') {
+			       sh '${scannerHome}/bin/sonar-scanner'
+		       
+        		}
+	        
+        	
+           }
+           
+       }
+ 	
+ 	
+ 	}
+}
